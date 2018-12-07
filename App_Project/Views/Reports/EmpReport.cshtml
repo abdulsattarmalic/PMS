@@ -1,0 +1,60 @@
+﻿@model IEnumerable<App_Project.Models.tbl_Employee>
+
+@{
+    ViewBag.Title = "EmpReport";
+}
+
+<h2 style="margin: 30px 5px 40px 10px;">Recent Employees</h2>
+
+<p>
+ <a class="btn btn-lg btn-block btn-danger" href="@Url.Action("CrystalReport")"> Download Employees Record  
+    <i class="glyphicon glyphicon-circle-arrow-down"></i> </a>
+</p>
+<table class="table table-bordered nav-tabs-justified table-hover table-condensed">
+    <tr class="success">
+        @*<th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.EmployeeID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobTitle)
+        </td>
+       
+    </tr>
+}
+
+</table>

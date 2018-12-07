@@ -1,0 +1,47 @@
+﻿@model  App_Project.Models.tbl_Projects
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEdit", "Projects", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    //its for project id & for insert operation its value will be 0 othercase non-zero value 
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProjectName, new { @class = "control-label" })
+        @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control", @placeholder = "ProjectName" } })
+        @Html.ValidationMessageFor(model => model.ProjectName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Only 1 Line Description" } })
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StartDate, new { @class = "control-label" })
+        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = " form-control " } } )
+        @Html.ValidationMessageFor(model => model.StartDate)
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EndDate, new { @class = "control-label" })
+        @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = " form-control  " } })
+        @Html.ValidationMessageFor(model => model.EndDate)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Priority, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control", @placeholder = "Priority High Or Low" } })
+        @Html.ValidationMessageFor(model => model.Priority)
+
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-success" />
+        <input type="reset" value="Reset" class="btn btn-danger" />
+    </div>
+}

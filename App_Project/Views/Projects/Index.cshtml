@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Projects List";
+}
+
+<h2> Projects</h2>
+<a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("AddOrEdit","Projects")')">
+    <i class="fa fa-plus"></i> Add New Project
+</a>
+<table id="projectsTable" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Priority</th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function () {
+            dataTable =  $("#projectsTable").DataTable({
+                "ajax": {
+                    "url": "/Projects/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                   
+                },
+                
+                "columns": [
+                    { "data": "ProjectName" },
+                    { "data": "Description" },
+                    { "data": "StartDate." },
+                    { "data": "EndDate" },
+                    { "data": "Priority" },
+                   
+                    //Date shows the proj id of current row.
+                    {"data":"Id" , "render" : function (data) {  
+                        return "<a class='btn btn-warning btn-sm' onclick=PopupForm('@Url.Action("AddOrEdit","Projects")/" + data + "')><i class='fa fa-pencil'></i>  Edit</a><a class='btn btn-danger btn-sm' style='margin-left:2px' onclick=Delete("+data+")><i class='fa fa-trash'></i>  Delete</a>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                        "width":"170px"
+                    }
+
+                ],
+                "language": {
+
+                    "emptyTable" : "No data found, Please click on <b>Add New </b> Button"
+                }
+            });
+        });
+
+        function PopupForm(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                Popup = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: false,
+                    title: ' Fill the Form to Add Project ',
+                    height: 550,
+                    width: 700,
+                    close: function () {
+                        Popup.dialog('destroy').remove();
+                    }
+
+                });
+            });
+        }
+
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if($(form).valid()){
+                $.ajax({
+                    type : "POST",
+                    url : form.action,
+                    data : $(form).serialize(),
+                    success : function (data) {
+                        if(data.success)
+                        {
+                            Popup.dialog('close');
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message,{
+                                globalPosition :"top center",
+                                className : "success"
+                            })
+
+                        }
+                    }
+                });
+            }
+            return false;
+        }   
+
+        function Delete(id) {
+            if(confirm('Are You Sure to Delete this Project Record ?'))
+
+            {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete","Projects")/' + id,
+                    success: function (data) {
+                        if (data.success)
+                        {
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                        }
+                    }
+
+                });
+            }
+        }
+
+    </script>
+    
+
+}
+
+

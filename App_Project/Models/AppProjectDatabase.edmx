@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="APP_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Admin">
+          <Key>
+            <PropertyRef Name="Admin_ID" />
+          </Key>
+          <Property Name="Admin_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Admin_First_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Admin_Last_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Admin_Email_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Admin_Phone_Number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Admin_Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Admin_User_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Admin_Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Doc">
+          <Key>
+            <PropertyRef Name="Doc_ID" />
+          </Key>
+          <Property Name="Project_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Doc_ID" Type="int" Nullable="false" />
+          <Property Name="Doc_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Doc_Description" Type="text" Nullable="false" />
+          <Property Name="Doc_Date" Type="date" Nullable="false" />
+          <Property Name="Doc_Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Doc_URL" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salary" Type="bigint" Nullable="false" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Message">
+          <Key>
+            <PropertyRef Name="Message_ID" />
+          </Key>
+          <Property Name="Message_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Message_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message_Description" Type="text" Nullable="false" />
+          <Property Name="Message_Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_PM">
+          <Key>
+            <PropertyRef Name="PM_ID" />
+          </Key>
+          <Property Name="PM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PM_First_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PM_Last_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PM_Email_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PM_Phone_Number" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PM_Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PM_User_Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PM_Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="StartDate" Type="varchar" MaxLength="50" />
+          <Property Name="EndDate" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Priority" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Task">
+          <Key>
+            <PropertyRef Name="Task_ID" />
+          </Key>
+          <Property Name="Task_ID" Type="int" Nullable="false" />
+          <Property Name="Task_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Task_Description" Type="text" Nullable="false" />
+          <Property Name="Task_Sart_Date" Type="date" Nullable="false" />
+          <Property Name="Task_End_Date" Type="date" Nullable="false" />
+          <Property Name="Task_TM_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_Admin_tbl_Admin">
+          <End Role="tbl_Admin" Type="Self.tbl_Admin" Multiplicity="1" />
+          <End Role="tbl_Admin1" Type="Self.tbl_Admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Admin">
+              <PropertyRef Name="Admin_ID" />
+            </Principal>
+            <Dependent Role="tbl_Admin1">
+              <PropertyRef Name="Admin_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="APP_DBModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Admin" EntityType="Self.tbl_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Doc" EntityType="Self.tbl_Doc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Message" EntityType="Self.tbl_Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PM" EntityType="Self.tbl_PM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Projects" EntityType="Self.tbl_Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Task" EntityType="Self.tbl_Task" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_Admin_tbl_Admin" Association="Self.FK_tbl_Admin_tbl_Admin">
+            <End Role="tbl_Admin" EntitySet="tbl_Admin" />
+            <End Role="tbl_Admin1" EntitySet="tbl_Admin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="APP_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_Admin">
+          <Key>
+            <PropertyRef Name="Admin_ID" />
+          </Key>
+          <Property Name="Admin_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Admin_First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Admin_Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Admin_Email_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Admin_Phone_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Admin_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Admin_User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Admin_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_Admin1" Relationship="Self.FK_tbl_Admin_tbl_Admin" FromRole="tbl_Admin" ToRole="tbl_Admin1" />
+          <NavigationProperty Name="tbl_Admin2" Relationship="Self.FK_tbl_Admin_tbl_Admin" FromRole="tbl_Admin1" ToRole="tbl_Admin" />
+        </EntityType>
+        <EntityType Name="tbl_Doc">
+          <Key>
+            <PropertyRef Name="Doc_ID" />
+          </Key>
+          <Property Name="Project_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Doc_ID" Type="Int32" Nullable="false" />
+          <Property Name="Doc_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Doc_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Doc_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Doc_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Doc_URL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salary" Type="Int64" Nullable="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Message">
+          <Key>
+            <PropertyRef Name="Message_ID" />
+          </Key>
+          <Property Name="Message_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message_Date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="tbl_PM">
+          <Key>
+            <PropertyRef Name="PM_ID" />
+          </Key>
+          <Property Name="PM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PM_First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PM_Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PM_Email_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PM_Phone_Number" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PM_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PM_User_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PM_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Task">
+          <Key>
+            <PropertyRef Name="Task_ID" />
+          </Key>
+          <Property Name="Task_ID" Type="Int32" Nullable="false" />
+          <Property Name="Task_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Task_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Task_Sart_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Task_End_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Task_TM_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_Admin_tbl_Admin">
+          <End Role="tbl_Admin" Type="Self.tbl_Admin" Multiplicity="1" />
+          <End Role="tbl_Admin1" Type="Self.tbl_Admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Admin">
+              <PropertyRef Name="Admin_ID" />
+            </Principal>
+            <Dependent Role="tbl_Admin1">
+              <PropertyRef Name="Admin_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PMS_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tbl_Admin" EntityType="Self.tbl_Admin" />
+          <EntitySet Name="tbl_Doc" EntityType="Self.tbl_Doc" />
+          <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" />
+          <EntitySet Name="tbl_Message" EntityType="Self.tbl_Message" />
+          <EntitySet Name="tbl_PM" EntityType="Self.tbl_PM" />
+          <EntitySet Name="tbl_Task" EntityType="Self.tbl_Task" />
+          <AssociationSet Name="FK_tbl_Admin_tbl_Admin" Association="Self.FK_tbl_Admin_tbl_Admin">
+            <End Role="tbl_Admin" EntitySet="tbl_Admin" />
+            <End Role="tbl_Admin1" EntitySet="tbl_Admin" />
+          </AssociationSet>
+          <EntitySet Name="tbl_Projects" EntityType="APP_DBModel.tbl_Projects" />
+        </EntityContainer>
+        <EntityType Name="tbl_Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Priority" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="APP_DBModelStoreContainer" CdmEntityContainer="PMS_DBEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="APP_DBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Admin">
+            <EntityTypeMapping TypeName="APP_DBModel.tbl_Admin">
+              <MappingFragment StoreEntitySet="tbl_Admin">
+                <ScalarProperty Name="Admin_ID" ColumnName="Admin_ID" />
+                <ScalarProperty Name="Admin_First_Name" ColumnName="Admin_First_Name" />
+                <ScalarProperty Name="Admin_Last_Name" ColumnName="Admin_Last_Name" />
+                <ScalarProperty Name="Admin_Email_ID" ColumnName="Admin_Email_ID" />
+                <ScalarProperty Name="Admin_Phone_Number" ColumnName="Admin_Phone_Number" />
+                <ScalarProperty Name="Admin_Address" ColumnName="Admin_Address" />
+                <ScalarProperty Name="Admin_User_Name" ColumnName="Admin_User_Name" />
+                <ScalarProperty Name="Admin_Password" ColumnName="Admin_Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Doc">
+            <EntityTypeMapping TypeName="APP_DBModel.tbl_Doc">
+              <MappingFragment StoreEntitySet="tbl_Doc">
+                <ScalarProperty Name="Project_ID" ColumnName="Project_ID" />
+                <ScalarProperty Name="Doc_ID" ColumnName="Doc_ID" />
+                <ScalarProperty Name="Doc_Name" ColumnName="Doc_Name" />
+                <ScalarProperty Name="Doc_Description" ColumnName="Doc_Description" />
+                <ScalarProperty Name="Doc_Date" ColumnName="Doc_Date" />
+                <ScalarProperty Name="Doc_Type" ColumnName="Doc_Type" />
+                <ScalarProperty Name="Doc_URL" ColumnName="Doc_URL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Employee">
+            <EntityTypeMapping TypeName="APP_DBModel.tbl_Employee">
+              <MappingFragment StoreEntitySet="tbl_Employee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Message">
+            <EntityTypeMapping TypeName="APP_DBModel.tbl_Message">
+              <MappingFragment StoreEntitySet="tbl_Message">
+                <ScalarProperty Name="Message_ID" ColumnName="Message_ID" />
+                <ScalarProperty Name="Message_Name" ColumnName="Message_Name" />
+                <ScalarProperty Name="Message_Description" ColumnName="Message_Description" />
+                <ScalarProperty Name="Message_Date" ColumnName="Message_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PM">
+            <EntityTypeMapping TypeName="APP_DBModel.tbl_PM">
+              <MappingFragment StoreEntitySet="tbl_PM">
+                <ScalarProperty Name="PM_ID" ColumnName="PM_ID" />
+                <ScalarProperty Name="PM_First_Name" ColumnName="PM_First_Name" />
+                <ScalarProperty Name="PM_Last_Name" ColumnName="PM_Last_Name" />
+                <ScalarProperty Name="PM_Email_ID" ColumnName="PM_Email_ID" />
+                <ScalarProperty Name="PM_Phone_Number" ColumnName="PM_Phone_Number" />
+                <ScalarProperty Name="PM_Address" ColumnName="PM_Address" />
+                <ScalarProperty Name="PM_User_Name" ColumnName="PM_User_Name" />
+                <ScalarProperty Name="PM_Password" ColumnName="PM_Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Task">
+            <EntityTypeMapping TypeName="APP_DBModel.tbl_Task">
+              <MappingFragment StoreEntitySet="tbl_Task">
+                <ScalarProperty Name="Task_ID" ColumnName="Task_ID" />
+                <ScalarProperty Name="Task_Name" ColumnName="Task_Name" />
+                <ScalarProperty Name="Task_Description" ColumnName="Task_Description" />
+                <ScalarProperty Name="Task_Sart_Date" ColumnName="Task_Sart_Date" />
+                <ScalarProperty Name="Task_End_Date" ColumnName="Task_End_Date" />
+                <ScalarProperty Name="Task_TM_ID" ColumnName="Task_TM_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Projects">
+            <EntityTypeMapping TypeName="APP_DBModel.tbl_Projects">
+              <MappingFragment StoreEntitySet="tbl_Projects">
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

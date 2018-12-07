@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+}
+
+
+@if (ViewBag.Error != null) 
+{
+    <h2>@ViewBag.Error</h2>
+}
+
+
+
+
+
+
+    <div class="form-area text-danger">
+        <form action="Chat" method="post"></form>
+
+        <form role="form" method="post" action="Chat">
+            <br style="clear:both">
+            <h1  style="margin-bottom: 15px; text-align: center;   "> Let's Get In Touch!</h1>
+
+            <div class="form-group">
+                <input type="text" class="form-control" name="receiverEmail" placeholder="Receiver Email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" type="textarea" name="message" placeholder="Say Something" maxlength="140" rows="12"></textarea>
+            </div>
+
+            <button type="submit" name="submit" class="btn btn-success btn-block" onclick="Done()">Send To Employee</button>
+        </form>
+    </div>
+
+<script src="~/Scripts/notify.min.js"></script>
+<script>
+
+    function Done () {
+        $.notify("Congrats! your message has been sent to the user ... ", "success");
+       
+        }
+</script>
+
+
+
+
